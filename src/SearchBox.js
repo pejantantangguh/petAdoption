@@ -9,6 +9,7 @@ class SearchParams extends React.Component {
         {context => (
           <div>
             <div className="search-params">
+            <form onSubmit={this.props.search}>
               <label htmlFor="location">
                 location
                 <input
@@ -51,7 +52,8 @@ class SearchParams extends React.Component {
                   ))}
                 </select>
               </label>
-              <button>Submit</button>
+              <button onClick={this.props.search}>Submit</button>
+              </form>
             </div>
           </div>
         )}
