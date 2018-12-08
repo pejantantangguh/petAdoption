@@ -26700,13 +26700,14 @@ function (_React$Component) {
         });
       }
 
+      var hero = photos[0] ? photos[0].value : "http://placecorgi.com/300/300";
       return _react.default.createElement(_router.Link, {
         to: "details/".concat(id),
         className: "pet"
       }, _react.default.createElement("div", {
         className: "image-container"
       }, _react.default.createElement("img", {
-        src: photos[0].value,
+        src: hero,
         alt: name
       })), _react.default.createElement("div", {
         className: "info"
@@ -26745,35 +26746,45 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 var SearchParams =
 /*#__PURE__*/
 function (_React$Component) {
   _inherits(SearchParams, _React$Component);
 
-  function SearchParams() {
+  function SearchParams(props) {
+    var _this;
+
     _classCallCheck(this, SearchParams);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(SearchParams).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchParams).call(this, props));
+    _this.handleFormSubmit = _this.handleFormSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
   }
 
   _createClass(SearchParams, [{
+    key: "handleFormSubmit",
+    value: function handleFormSubmit() {
+      event.preventDefault();
+      this.props.search();
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this2 = this;
 
       return _react.default.createElement(_SearchContext.Consumer, null, function (context) {
         return _react.default.createElement("div", null, _react.default.createElement("div", {
           className: "search-params"
         }, _react.default.createElement("form", {
-          onSubmit: _this.props.search
+          onSubmit: _this2.handleFormSubmit
         }, _react.default.createElement("label", {
           htmlFor: "location"
         }, "location", _react.default.createElement("input", {
@@ -26806,9 +26817,7 @@ function (_React$Component) {
             key: breed,
             value: breed
           }, breed);
-        }))), _react.default.createElement("button", {
-          onClick: _this.props.search
-        }, "Submit"))));
+        }))), _react.default.createElement("button", null, "Submit"))));
       });
     }
   }]);
@@ -26830,11 +26839,11 @@ var _react = _interopRequireDefault(require("react"));
 
 var _petfinderClient = _interopRequireDefault(require("petfinder-client"));
 
+var _SearchContext = require("./SearchContext");
+
 var _Pet = _interopRequireDefault(require("./Pet"));
 
 var _SearchBox = _interopRequireDefault(require("./SearchBox"));
-
-var _SearchContext = require("./SearchContext");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26850,13 +26859,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 // under imports
 var petfinder = (0, _petfinderClient.default)({
@@ -26876,9 +26885,9 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Results).call(this, props));
     _this.state = {
-      pets: [],
-      search: _this.search
+      pets: []
     };
+    _this.search = _this.search.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -26954,9 +26963,7 @@ function ResultsWithContext(props) {
     }));
   });
 }
-
-;
-},{"react":"../node_modules/react/index.js","petfinder-client":"../node_modules/petfinder-client/index.js","./Pet":"Pet.js","./SearchBox":"SearchBox.js","./SearchContext":"SearchContext.js"}],"Carousel.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","petfinder-client":"../node_modules/petfinder-client/index.js","./SearchContext":"SearchContext.js","./Pet":"Pet.js","./SearchBox":"SearchBox.js"}],"Carousel.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27191,6 +27198,8 @@ var _react = _interopRequireDefault(require("react"));
 
 var _SearchBox = _interopRequireDefault(require("./SearchBox"));
 
+var _router = require("@reach/router");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -27203,31 +27212,42 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 var SearchParams =
 /*#__PURE__*/
 function (_React$Component) {
   _inherits(SearchParams, _React$Component);
 
-  function SearchParams() {
+  function SearchParams(props) {
+    var _this;
+
     _classCallCheck(this, SearchParams);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(SearchParams).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchParams).call(this, props));
+    _this.handleSearchSubmit = _this.handleSearchSubmit.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
   }
 
   _createClass(SearchParams, [{
+    key: "handleSearchSubmit",
+    value: function handleSearchSubmit() {
+      (0, _router.navigate)("/");
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react.default.createElement("div", {
         className: "search-route"
-      }, _react.default.createElement(_SearchBox.default, null));
+      }, _react.default.createElement(_SearchBox.default, {
+        search: this.handleSearchSubmit
+      }));
     }
   }]);
 
@@ -27236,7 +27256,7 @@ function (_React$Component) {
 
 var _default = SearchParams;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./SearchBox":"SearchBox.js"}],"App.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./SearchBox":"SearchBox.js","@reach/router":"../node_modules/@reach/router/es/index.js"}],"App.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -27277,7 +27297,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 var petfinder = (0, _petfinderClient.default)({
   key: "1d5ea0e22d28536013d7aed881e3fefc",
-  secret: "20ea7e9835dea3e2fd0421db7fa9fd7e"
+  secret: undefined
 });
 
 var App =
@@ -27360,7 +27380,12 @@ function (_React$Component) {
     value: function render() {
       return _react.default.createElement("div", null, _react.default.createElement(_router.Link, {
         to: "/"
-      }, _react.default.createElement("header", null, "Adopt Me!")), _react.default.createElement(_SearchContext.Provider, {
+      }, _react.default.createElement("header", null, "Adopt Me!")), _react.default.createElement(_router.Link, {
+        to: "/search-params"
+      }, _react.default.createElement("span", {
+        "aria-label": "search",
+        role: "image"
+      }, "\uD83D\uDD0D")), _react.default.createElement(_SearchContext.Provider, {
         value: this.state
       }, _react.default.createElement(_router.Router, null, _react.default.createElement(_Results.default, {
         path: "/"
@@ -27403,7 +27428,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55797" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64327" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
